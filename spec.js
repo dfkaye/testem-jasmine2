@@ -1,4 +1,3 @@
-
 describe('jasmine', function () {
 
     it('should find jasmine', function () {
@@ -8,10 +7,13 @@ describe('jasmine', function () {
     
     it('should run async with done', function (done) {
     
+        var t = 500;
+        var x = (+new Date());
+        
         setTimeout(function() {
-            expect(jasmine).toBeDefined();
+            y = (+new Date()) - x;
+            expect(y >= t).toBe(true);
             done();
-         }, 500);
-    
+         }, t);
     });    
 });
