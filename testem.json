@@ -1,6 +1,8 @@
 {
   "framework": "jasmine2",
   "src_files" : [
-    "spec.js"
+    "introduction.spec.js",
+    "custom.matcher.spec.js",
+    "custom.equality.spec.js"
   ]
 }
