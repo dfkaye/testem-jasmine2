@@ -495,7 +495,7 @@ getJasmineRequireObj().Env = function(j$) {
       options.catchException = self.catchException;
       options.clearStack = options.clearStack || clearStack;
 
-      new j$.QueueRunner(options).run(options.fns, 0);
+      new j$.QueueRunner(options).execute();
     };
 
     var totalSpecsDefined = 0;
@@ -1781,9 +1781,9 @@ getJasmineRequireObj().matchersUtil = function(j$) {
     var result = true;
 
     for (var i = 0; i < customTesters.length; i++) {
-      result = customTesters[i](a, b);
-      if (result) {
-        return true;
+      var customTesterResult = customTesters[i](a, b);
+      if (!j$.util.isUndefined(customTesterResult)) {
+        return customTesterResult;
       }
     }
 
@@ -1906,6 +1906,7 @@ getJasmineRequireObj().matchersUtil = function(j$) {
     }
   }
 };
+
 getJasmineRequireObj().toBe = function() {
   function toBe() {
     return {
@@ -2387,5 +2388,5 @@ getJasmineRequireObj().toThrowError = function(j$) {
 };
 
 getJasmineRequireObj().version = function() {
-  return "2.0.0-rc2";
+  return "2.0.0-rc3";
 };
