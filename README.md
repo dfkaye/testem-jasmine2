@@ -4,25 +4,29 @@ testem-jasmine2
 Quick hack to configure [testem](https://github.com/airportyh/testem) to launch 
 with jasmine2.  
 
-*note to self - send pull request to toby once jasmine2 is stabilized*
+*Note: does not hack on jasmine-node, as that's a separate project with its own 
+jasmine-lib version.*
+
+*Note to self: send pull request to toby once jasmine2 is stabilized*
 
 1. install or update testem
 
         npm install -g testem
         npm update -g testem
 
-
-2. acquire standalone jasmine 2 release zip file at https://github.com/pivotal/jasmine/tree/master/dist
+2. acquire standalone jasmine 2 release zip file at 
+    [https://github.com/pivotal/jasmine/tree/master/dist](https://github.com/pivotal/jasmine/tree/master/dist)
 
   or use the jasmine-2.0.0-rc3 files on this repo.
 
-3. cd to your global npm/node_modules/testem dir
+3. cd to your global <code>npm/node_modules/testem</code> directory.
 
-  yes, we're going to hack testem - forgive me.
+  Yes, we're going to hack testem - forgive me.
 
-4. mkdir ./public/testem/jasmine2 
+4. <code>mkdir ./public/testem/jasmine2</code>
 
-5. copy these files from the jasmine2's /lib directory, to public/testem/jasmine2
+5. copy these files from the jasmine2's <code>/lib</code> directory, to 
+  <code>public/testem/jasmine2</code>:
 
         boot.js
         jasmine.css
@@ -30,10 +34,10 @@ with jasmine2.
         jasmine-favicon.png
         jasmine-html.js
   
-6. create jasmine2runner.mustache from the following source and save to ./testem/views dir
+6. create <code>jasmine2runner.mustache</code> from the following source and 
+   save to <code>./testem/views</code> dir
 
     or copy from the jasmine2runner.mustache also on this repo:
-    
     
         <!DOCTYPE html>
         <html>
@@ -55,7 +59,8 @@ with jasmine2.
         <body></body>
         </html>
 
-7. add templateFile entry in the renderRunnerPage() method in ./testem/lib/server.js:
+7. add a <code>templateFile</code> entry in the <code>renderRunnerPage()</code> 
+    method in <code>./testem/lib/server.js</code>:
 
         
         , renderRunnerPage: function(err, files, res){
@@ -70,7 +75,8 @@ with jasmine2.
             , qunit: 'qunitrunner'
         ...
 
-8. create a smoke test spec file in your project:
+8. create a smoke test spec file in your project, or use the 
+    <code>smoke.spec.js</code> in this repo:
 
         describe('jasmine', function () {
     
@@ -89,7 +95,23 @@ with jasmine2.
                     expect(y >= t).toBe(true);
                     done();
                  }, t);
-            });    
+            });
+  
+            describe('custom equality matcher for version', function() {
+
+              beforeEach(function() {
+                jasmine.addCustomEqualityTester(function partial(first, second) {
+                    if (typeof first == 'string' && typeof second == 'string') {
+                      return first.indexOf(second) === 0;
+                    }
+                });
+              });
+              
+              it('should be 2.0.0', function () {
+                expect(jasmine.version).toEqual('2.0.0');
+              });
+              
+            });            
         });
     
 9. create testem.json in your project, listing your (or jasmine 2's) specs:
@@ -97,7 +119,7 @@ with jasmine2.
         {
           "framework": "jasmine2",
           "src_files" : [
-            "version.spec.js",
+            "smoke.spec.js",
             "introduction.spec.js",
             "custom.matcher.spec.js",
             "custom.equality.spec.js"
@@ -108,4 +130,6 @@ with jasmine2.
 
         cd ./your-jasmine2-project
         testem
-    
+
+        
+Happy testing with jasmine-2 and testem!
