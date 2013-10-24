@@ -92,12 +92,15 @@ with jasmine2.
             });    
         });
     
-9. create testem.json in your project:
+9. create testem.json in your project, listing your (or jasmine 2's) specs:
 
         {
           "framework": "jasmine2",
           "src_files" : [
-            "spec.js"
+            "version.spec.js",
+            "introduction.spec.js",
+            "custom.matcher.spec.js",
+            "custom.equality.spec.js"
           ]
         }
     
