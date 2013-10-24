@@ -106,6 +106,6 @@ with jasmine2.
     
 10. run from the command line:
 
-        cd ./j2project
+        cd ./your-jasmine2-project
         testem
     
