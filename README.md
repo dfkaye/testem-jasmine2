@@ -17,7 +17,7 @@ jasmine-lib version.*
 2. acquire standalone jasmine 2 release zip file at 
     [https://github.com/pivotal/jasmine/tree/master/dist](https://github.com/pivotal/jasmine/tree/master/dist)
 
-  or use the jasmine-2.0.0-rc3 files on this repo.
+  or use the jasmine-2.0.0 files on this repo.
 
 3. cd to your global <code>npm/node_modules/testem</code> directory.
 
@@ -25,10 +25,11 @@ jasmine-lib version.*
 
 4. <code>mkdir ./public/testem/jasmine2</code>
 
-5. copy these files from the jasmine2's <code>/lib</code> directory, to 
+5. copy these files from the jasmine-2.0.0 <code>/lib</code> directory, to 
   <code>public/testem/jasmine2</code>:
 
         boot.js
+        console.js
         jasmine.css
         jasmine.js
         jasmine-favicon.png
