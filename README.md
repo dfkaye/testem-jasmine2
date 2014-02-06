@@ -1,3 +1,11 @@
+# deprecated / obsolete as of 20 JAN 2014
+
+*[testem](https://github.com/airportyh/testem) supports jasmines 2.0 as of v __0.6.3__*
+
+hack instructions below for historical reference only
+
+...
+
 testem-jasmine2
 ===============
 
